@@ -5,7 +5,7 @@ class CarroForm(ModelForm):
    
     class Meta:
         model=Carro
-        fields=["modelo", "marca", "combustivel", "tipo", "ano", "placa", "foto", "cor", "diaria" ]
+        fields=["modelo", "marca", "combustivel", "tipo", "bio", "ano", "placa", "foto", "cor", "diaria" ]
 
 
 class UsuarioForm(ModelForm):

@@ -43,6 +43,7 @@ class Carro(models.Model):
     marca = models.CharField("Marca", choices=MARCA, max_length=50)
     combustivel = models.CharField("Combustível", max_length=50, choices=COMBUSTIVEL)
     tipo = models.CharField("Categoria", max_length=100, choices=CATEGORIAS)
+    bio = models.TextField("Sobre o carro", blank=True, null=True)
     ano = models.PositiveIntegerField("Ano")
     placa = models.CharField(max_length=15, unique=True, error_messages={'unique':"Veículo já cadastrado!"})
     foto = models.ImageField("Foto", upload_to='carros/', blank=True, null=True)
