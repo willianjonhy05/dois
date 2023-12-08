@@ -52,9 +52,7 @@ class Carro(models.Model):
 
 
     def __str__(self):
-        carro = self.marca +' '+ self.modelo +' '+ str(self.ano) + ' - '
-        carro += self.placa +' -- Diária padrão R$ '+ str(self.diaria)
-        return carro
+       return f"{self.modelo} - {self.placa}" - {self.status}
     
     class Meta:
         verbose_name = "Carro"
@@ -146,8 +144,8 @@ class Contrato(models.Model):
     status = models.CharField(max_length=12, choices=ANDAMENTO, default='Ativo')
 
     def __str__(self):
-        inicio, fim = str(self.inicio_do_contrato), str(self.fim_do_contrato)
-        return self.locatario.nome + ' | ' + inicio + '/' + fim
+       return f"{self.carro.modelo} - {self.locatario.nome} - {self.quantidade_de_dias} - {self.valor_total}"
+    
     class Meta:
         verbose_name = "Contrato"
         verbose_name_plural = "Contratos"
