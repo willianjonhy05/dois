@@ -70,7 +70,7 @@ class Usuario(models.Model):
 
     nome = models.CharField("Nome", max_length=100)
     sobrenome = models.CharField("Sobrenome", max_length=100)
-    cpf = models.CharField('CPF:',max_length=14)
+    cpfcnpj = models.CharField('CPF:',max_length=18)
     email = models.EmailField("Email")
     telefone = models.CharField("Telefone", max_length=20)
     data_nasc = models.DateField("Data de Nascimento")
@@ -85,7 +85,7 @@ class Usuario(models.Model):
     sexo = models.CharField("Sexo", max_length=100, choices=SEXO)
     
     def __str__(self):
-        return f'{self.nome} {self.sobrenome}'
+        return f'{self.nome} {self.sobrenome} - {self.email} - {self.idade}'
     
     class Meta:
         verbose_name = "Usuário"
