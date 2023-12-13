@@ -1,16 +1,51 @@
-{% extends "base.html" %}
+{% extends "base_dois.html" %}
 {% load static bootstrap5 %}
-{% block title %}Pagina Inicial do Site{% endblock %}
+{% block title %}Lista de Carros{% endblock %}
 
 
 
 {% block content %}
+<div class="container">
+    <form class="d-flex mb-5" role="search" method="get">
+        <input class="form-control me-2" type="search" placeholder="Pesquise por modelo" aria-label="Pesquisar"
+            name="busca" id="busca">
+        <button class="btn btn-outline-success" type="submit">Pesquisar</button>
+    </form>
 
+</div>
+
+
+<div>
+{% for autor in page_obj %}
+<div class="card mb-3" style="max-width: 950px;">
+    <div class="row g-0">
+        <div class="col-md-4">
+           <a href="{% url 'detalhar-carro' carro.id %}"><img src="{{ carro.foto.url }}" class="img-fluid rounded-start" alt="{{ carro.modelo }}"></a>
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h6 class="card-title">{{carro.tipo}}</h6>
+                <h3 class="card-title">Diária: R$ {{carro.diaria}}</h3>
+                <p class="card-text">Este é um carro que é da categoria {{carro.tipo}}, da {{carro.marca}}, é movido por {{carro.combustivel}}. Esse veículo é do ano {{carro.ano}} na cor {{carro.cor}}</p>
+                <a href="{% url 'detalhar-carro' carro.id %}" class="btn btn-primary">Saber Mais</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+</div>
+
+
+
+<div class="container">
+
+    {% bootstrap_pagination page_obj %}
+</div>
 
 
 {% endblock %}
 
 
 {% block scripts %}
-    
+
 {% endblock %}

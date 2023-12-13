@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import date
+from django.contrib.auth import get_user_model
 
 # Create your models here.
 
@@ -48,7 +49,7 @@ class Carro(models.Model):
     placa = models.CharField(max_length=15, unique=True, error_messages={'unique':"Veículo já cadastrado!"})
     foto = models.ImageField("Foto", upload_to='carros/', blank=True, null=True)
     cor = models.CharField("Cor", max_length=50)
-    diaria = models.FloatField("Valor da diária", decimal_places=2)    
+    diaria = models.DecimalField("Valor da diária", max_digits=8, decimal_places=2)    
     status = models.CharField(max_length=12, choices=STATUS, default='Disponível')
 
 
@@ -76,6 +77,7 @@ class Usuario(models.Model):
     telefone = models.CharField("Telefone", max_length=20)
     data_nasc = models.DateField("Data de Nascimento")
     perfil = models.ImageField("Foto", upload_to='perfil', blank=True, null=True)
+    user = models.OneToOneField(get_user_model(),verbose_name="Usuário:", on_delete=models.CASCADE, blank=True, null=True)
 
     def calculo_de_idade(self):
         hoje = date.today()

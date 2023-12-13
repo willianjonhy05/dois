@@ -1,9 +1,13 @@
+from typing import Any
+from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.views.generic import TemplateView, CreateView, ListView, UpdateView, DeleteView, DetailView
 from .models import Carro, Usuario, Contrato
+from django.contrib.auth import get_user_model
 from django.urls import reverse
-from .forms import CarroForm
+from .forms import CarroForm, RegistrationForm
 from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
 
 # Views Públicas - São Responsáveis para visualização do Público Geral // Sem necessidade de Login
@@ -18,11 +22,30 @@ class CarrosListView(ListView):
     context_object_name='carros'
     paginate_by = 5
 
+    def get_queryset(self):
+        search = self.request.GET.get("busca")
+
+        if search:
+            self.carros = Carro.objects.filter(modelo__icontains=search)
+        else:
+            self.carros = Carro.objects.all()
+
+        return self.carros
+
 class CarroPage(DetailView):
     model=Carro
     template_name='carro.html'
     context_object_name='carro'
     pk_url_kwarg='id'
+
+class RegistrationView(CreateView):
+    template_name = "registration/registration.html"
+    model = get_user_model()
+    form_class = RegistrationForm
+
+    def get_success_url(self):
+        messages.add_message(self.request, messages.SUCCESS, "Cadastro realizado com sucesso!")
+        return reverse('home')
 
 # Views Privadas - São Responsáveis para visualização restritas do admin // Com necessidade de Login
 

@@ -18,11 +18,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
-from aluguel.views import Home, CarrosListView, CarroPage
+from aluguel.views import Home, CarrosListView, CarroPage, RegistrationView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', Home.as_view(), name="home"),
+    path('accounts/registration', RegistrationView.as_view(), name='registration'),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('carros/', CarrosListView.as_view(), name='lista_de_carros'),
     path('locador/', include('aluguel.urls')),
     path('carro/<int:id>', CarroPage.as_view(), name='detalhar-carro'),
