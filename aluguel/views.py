@@ -52,6 +52,7 @@ class CriarUsuario(CreateView):
     model = Usuario
     template_name = 'criar_usuario.html'
     form_class = UsuarioForm
+    
 
     def get_success_url(self):
         messages.add_message(self.request, messages.SUCCESS, "Usuário cadastrado com sucesso!")
@@ -103,6 +104,17 @@ class ListarUsuarios(ListView):
     model=Usuario
     template_name='locador/usuarios.html'
     context_object_name='usuarios'
+    paginate_by = 5
+
+    def get_queryset(self):
+        search = self.request.GET.get("busca")
+
+        if search:
+            self.usuarios = Usuario.objects.filter(nome__icontains=search)
+        else:
+            self.usuarios = Usuario.objects.all()
+
+        return self.usuarios
 
 
 class ApagarUsuario(DeleteView):
@@ -119,6 +131,14 @@ class AtualizarUsuarioAdm(UpdateView):
     def get_success_url(self):
         messages.add_message(self.request, messages.SUCCESS, "Usuário atualizado com sucesso!")
         return reverse('todos_os_usuario')
+    
+
+class DetalharUsuario(DetailView):
+    model=Usuario
+    template_name='locador/detalhar_usuario.html'
+    context_object_name='usuario'
+    pk_url_kwarg='id'
+
 
 # class Contratos(ListView):
 #     model=Contrato

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CarrosAdm, CarroDeleteView, CarrosCreateView, CarroUpdateView, CarroPageAdm, ApagarUsuario, ListarUsuarios, AtualizarUsuarioAdm
+from .views import CarrosAdm, CarroDeleteView, CarrosCreateView, CarroUpdateView, CarroPageAdm, ApagarUsuario, ListarUsuarios, AtualizarUsuarioAdm, DetalharUsuario
 # from .views import Contratos
 
 urlpatterns = [
@@ -12,6 +12,7 @@ urlpatterns = [
     path('usuarios/', ListarUsuarios.as_view(), name='todos_os_usuario'),
     path('usuarios/atualizar/<int:id>', AtualizarUsuarioAdm.as_view(), name='atualizar_usuario'), 
     path('usuarios/deletar/<int:id>', ApagarUsuario.as_view(), name='apagar_usuario'),
+    path('detalhar/<int:id>', DetalharUsuario.as_view(), name='detalhar_usuario'),
     
 
     
