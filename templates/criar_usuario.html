@@ -1,0 +1,23 @@
+{% extends "base_dois.html" %}
+{% load static bootstrap5 %}
+{% block title %}Cadastrar Usuário{% endblock %}
+
+
+
+{% block content %}
+
+<div class="container">
+    <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button class="btn btn-primary" type="submit">Cadastrar</button>
+    </form>
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+<script src="{% static 'js/cpf_cnpj.js' %}" defer></script>
+<script src="{% static 'js/telefone.js' %}" defer></script>
+{% endblock %}

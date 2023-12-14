@@ -1,0 +1,21 @@
+{% extends 'base_adm.html' %}
+{% load static bootstrap5 %}
+{% block title %}Detalhar Usuário{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="d-grid gap-2">
+        <a href="{% url 'atualizar_usuario' usuario.id %}" class="btn btn-primary" role="button">Atualizar Usuário</a>
+        <a href="{% url 'apagar_usuario' usuario.id %}" class="btn btn-danger" role="button">Apagar Usuário</a>
+
+    </div>
+
+</div>
+
+
+{% endblock content %}
+
+{% block scripts %}
+
+{% endblock %}
