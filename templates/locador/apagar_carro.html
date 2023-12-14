@@ -1,0 +1,24 @@
+{% extends 'base_adm.html' %}
+{% load static bootstrap5 %}
+{% block title %}Apagar Carro{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h1>Apagando Carro</h1>
+    <form method="post">{% csrf_token %}
+        <h3 class="featurette-heading fw-normal lh-1">Tem certeza que deseja apagar todos os dados de "{{ object }}"?</h3>
+        {{ form }}
+        <p class="lead text-center">
+            <input type="submit" class="btn btn-danger" value="Confirmar">
+            <a href="{% url 'todos_os_carros' %}" class="btn btn-secondary">Cancelar</a>
+        </p>
+
+    </form>
+</div>
+
+{% endblock content %}
+
+{% block scripts %}
+
+{% endblock %}

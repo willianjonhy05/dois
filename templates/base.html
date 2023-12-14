@@ -9,13 +9,14 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="shortcut icon" href="{% static 'img/favicon/favicon.png' %}" type="image/x-icon">
     <link rel="icon" href="{% static 'img/favicon/favicon.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
     <title>{% block title %}Base{% endblock %}</title>
 </head>
 
 <body>
-    <header class="p-3 bg-dark">
+    <header class="p-3 bg-secondary text-white">
 
-        <div class="container" class="p-3 text-bg-dark">
+        <div class="container" class="p-3 text-bg-light">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <a href="{% url 'home' %}"
                     class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none me-5">
@@ -33,18 +34,26 @@
 
                 {% if user.is_authenticated %}
                 <div class="dropdown text-end">
+                    {% if user.usuario.perfil %}
                     <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
-                        data-bs-toggle="dropdown" aria-expanded="false">
+                        data-bs-toggle="dropdown" aria-expanded="false">                        
                         <img src="{{ usuario.perfil.url }}" alt="mdo" width="32" height="32" class="rounded-circle">
                     </a>
-                    <ul class="dropdown-menu text-small">
+                    {% else %}
+                    <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+                    data-bs-toggle="dropdown" aria-expanded="false">                        
+                    <img src="{% static 'img/perfil-de-usuario.jpg' %}" alt="mdo" width="32" height="32" class="rounded-circle">
+                </a>
+                {% endif %}
+
+                    <ul class="dropdown-menu text-small" aria-labelledby="navbarDarkDropdownMenuLink">
                         <li><a class="dropdown-item" href="#">Novo Aluguél</a></li>
                         <li><a class="dropdown-item" href="#">Devolver Carro</a></li>
                         <li><a class="dropdown-item" href="#">Perfil</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="{% url 'sair' %}">Sair</a></li>
+                        <li><a class="dropdown-item" href="{% url 'logout' %}">Sair</a></li>
                     </ul>
 
 
@@ -52,7 +61,7 @@
                 {% else %}
 
                 <div class="text-end">
-                    <button type="button" class="btn btn-outline-light me-2">Login</button>
+                    <a href="{% url 'login' %}"><button type="button" class="btn btn-outline-light me-2">Login</button></a>
                     <a href="{% url 'registration' %}"><button type="button"
                             class="btn btn-warning">Cadastre-se</button></a>
                 </div>

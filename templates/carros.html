@@ -12,27 +12,32 @@
         <button class="btn btn-outline-success" type="submit">Pesquisar</button>
     </form>
 
+
+
 </div>
 
 
-<div>
-{% for autor in page_obj %}
-<div class="card mb-3" style="max-width: 950px;">
-    <div class="row g-0">
-        <div class="col-md-4">
-           <a href="{% url 'detalhar-carro' carro.id %}"><img src="{{ carro.foto.url }}" class="img-fluid rounded-start" alt="{{ carro.modelo }}"></a>
-        </div>
-        <div class="col-md-8">
-            <div class="card-body">
-                <h6 class="card-title">{{carro.tipo}}</h6>
-                <h3 class="card-title">Diária: R$ {{carro.diaria}}</h3>
-                <p class="card-text">Este é um carro que é da categoria {{carro.tipo}}, da {{carro.marca}}, é movido por {{carro.combustivel}}. Esse veículo é do ano {{carro.ano}} na cor {{carro.cor}}</p>
-                <a href="{% url 'detalhar-carro' carro.id %}" class="btn btn-primary">Saber Mais</a>
+<div class="container">
+    {% for carro in page_obj %}
+    {% if carro.status == 'Disponível' %}
+    <div class="card mb-3 mx-5" style="max-width: 950px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <a href="{% url 'detalhar-carro' carro.id %}"><img src="{{ carro.foto.url }}"
+                        class="img-fluid rounded-start" alt="{{ carro.modelo }}"></a>
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h6 class="card-title">{{carro.tipo}}</h6>
+                    <h3 class="card-title">{{carro.marca}} {{carro.modelo}} | Diária: R$ {{carro.diaria}}</h3>
+                    <p class="card-text">{{carro.bio}}</p>
+                    <a href="{% url 'detalhar-carro' carro.id %}" class="btn btn-primary">Saber Mais</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
-{% endfor %}
+    {% endif %}
+    {% endfor %}
 </div>
 
 

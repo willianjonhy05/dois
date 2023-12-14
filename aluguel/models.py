@@ -54,7 +54,7 @@ class Carro(models.Model):
 
 
     def __str__(self):
-       return f"{self.modelo} - {self.placa}" - {self.status}
+       return f"{self.modelo} - {self.placa} - {self.status}"
     
     class Meta:
         verbose_name = "Carro"

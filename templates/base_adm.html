@@ -9,12 +9,13 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="shortcut icon" href="{% static 'img/favicon/favicon.png' %}" type="image/x-icon">
     <link rel="icon" href="{% static 'img/favicon/favicon.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
     <title>{% block title %}Base{% endblock %}</title>
 </head>
 
 <body>
-    <header class="p-3 bg-secondary text-white mb-5">
+    <header class="p-3 bg-danger text-white mb-5">
 
         <div class="container" class="p-3 text-bg-dark">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -26,9 +27,9 @@
 
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
 
-                    <li><a href="{% url 'lista_de_carros' %}" class="nav-link px-2 text-white">Carros</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
+                    <li><a href="{% url 'todos_os_carros' %}" class="nav-link px-2 text-white active">Todos os Carros</a></li>
+                    <li><a href="#" class="nav-link px-2 text-white">Carros Alugados</a></li>
+                    <li><a href="#" class="nav-link px-2 text-white">Carros Disponíveis</a></li>
                     <li><a href="#" class="nav-link px-2 text-white">About</a></li>
                 </ul>
 
@@ -36,10 +37,10 @@
 
                 {% if user.is_authenticated %}
                 <div class="dropdown text-end">
-                    {% if user.usuario.perfil %}
+                    {% if user.locador.avatar %}
                     <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
                         data-bs-toggle="dropdown" aria-expanded="false">                        
-                        <img src="{{ usuario.perfil.url }}" alt="mdo" width="32" height="32" class="rounded-circle">
+                        <img src="{{ locador.avatar.url }}" alt="mdo" width="32" height="32" class="rounded-circle">
                     </a>
                     {% else %}
                     <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
@@ -50,10 +51,12 @@
                     <ul class="dropdown-menu text-small">
                         <li><a class="dropdown-item" href="#">Novo Aluguél</a></li>
                         <li><a class="dropdown-item" href="#">Devolver Carro</a></li>
-                        <li><a class="dropdown-item" href="#">Perfil</a></li>
+                        <li><a class="dropdown-item" href="{% url 'todos_os_carros' %}">Listar Carros</a></li>
+                        <li><a class="dropdown-item" href="{% url 'cadastrar-carro' %}">Cadastrar Carro</a></li>                        
                         <li>
                             <hr class="dropdown-divider">
                         </li>
+                        <li><a class="dropdown-item" href="#">Perfil</a></li>
                         <li><a class="dropdown-item" href="{% url 'logout' %}">Sair</a></li>
                     </ul>
 
@@ -103,10 +106,10 @@
             <ul class="nav col-md-4 justify-content-end">
                 <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2 text-body-secondary">Home</a></li>
                 <li class="nav-item"><a href="{% url 'lista_de_carros' %}"
-                        class="nav-link px-2 text-body-secondary">Carros</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
+                        class="nav-link px-2 text-body-secondary">Listar Carros</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Cadastrar Carro</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Termos de Uso</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Quem Somos</a></li>
             </ul>
         </footer>
     </div>

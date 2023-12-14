@@ -1,0 +1,9 @@
+/* styles.css */
+
+/* Personalize a cor do triângulo do dropdown */
+.navbar-dark .navbar-nav .nav-item.dropdown:hover .nav-link::after,
+.navbar-dark .navbar-nav .nav-item.dropdown:focus .nav-link::after,
+.navbar-dark .navbar-nav .nav-item.dropdown.show .nav-link::after {
+  border-top-color: #fff; /* Cor desejada (branco) */
+}
+

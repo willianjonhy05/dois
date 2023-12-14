@@ -1,0 +1,59 @@
+{% extends 'base_adm.html' %}
+{% load static bootstrap5 %}
+{% block title %}Lista de Carros{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    {% for carro in carros %}
+    <div class="mb-5">
+        {% bootstrap_messages %}
+        <h1>Lista de Carros Disponíveis para Aluguél</h1>
+    </div>
+    {% if carro.status == 'Disponível' %}
+
+    <div class="card mb-3 mx-5" style="max-width: 950px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <a href="{% url 'exibir_carro' carro.id %}"><img src="{{ carro.foto.url }}"
+                        class="img-fluid rounded-start" alt="{{ carro.modelo }}"></a>
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h6 class="card-title">{{carro.tipo}}</h6>
+                    <h3 class="card-title">{{carro.marca}} {{carro.modelo}} | Diária: R$ {{carro.diaria}}</h3>
+                    <p class="card-text">{{carro.bio}}</p>
+                    <a href="{% url 'exibir_carro' carro.id %}" class="btn btn-primary">Saber Mais</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="mb-5">
+        <h1>Lista de Carros indisponíveis para Aluguél</h1>
+    </div>
+    <div class="card mb-3 mx-5" style="max-width: 950px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <a href="{% url 'exibir_carro' carro.id %}"><img src="{{ carro.foto.url }}"
+                        class="img-fluid rounded-start" alt="{{ carro.modelo }}"></a>
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h6 class="card-title">{{carro.tipo}}</h6>
+                    <h3 class="card-title">{{carro.marca}} {{carro.modelo}} | Diária: R$ {{carro.diaria}}</h3>
+                    <p class="card-text">{{carro.bio}}</p>
+                    <a href="{% url 'detalhar-carro' carro.id %}" class="btn btn-primary">Saber Mais</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+
+{% endblock content %}
+
+{% block scripts %}
+
+{% endblock %}
