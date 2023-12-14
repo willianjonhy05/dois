@@ -72,10 +72,10 @@ class Usuario(models.Model):
 
     nome = models.CharField("Nome", max_length=100)
     sobrenome = models.CharField("Sobrenome", max_length=100)
-    cpfcnpj = models.CharField('CPF:',max_length=18)
+    cpfcnpj = models.CharField('CPF:',max_length=18, blank=True, null=True)
     email = models.EmailField("Email")
-    telefone = models.CharField("Telefone", max_length=20)
-    data_nasc = models.DateField("Data de Nascimento")
+    telefone = models.CharField("Telefone", max_length=20, blank=True, null=True)
+    data_nasc = models.DateField("Data de Nascimento", blank=True, null=True)
     perfil = models.ImageField("Foto", upload_to='perfil', blank=True, null=True)
     user = models.OneToOneField(get_user_model(),verbose_name="Usuário:", on_delete=models.CASCADE, blank=True, null=True)
 

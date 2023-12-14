@@ -27,9 +27,9 @@
 
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
 
-                    <li><a href="{% url 'todos_os_carros' %}" class="nav-link px-2 text-white active">Todos os Carros</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">Carros Alugados</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">Carros Disponíveis</a></li>
+                    <li><a href="{% url 'todos_os_carros' %}" class="nav-link px-2 text-white active">Carros</a></li>
+                    <li><a href="{% url 'todos_os_usuario' %}" class="nav-link px-2 text-white">Usuários</a></li>
+                    <li><a href="#" class="nav-link px-2 text-white">Contratos</a></li>
                     <li><a href="#" class="nav-link px-2 text-white">About</a></li>
                 </ul>
 
@@ -52,7 +52,9 @@
                         <li><a class="dropdown-item" href="#">Novo Aluguél</a></li>
                         <li><a class="dropdown-item" href="#">Devolver Carro</a></li>
                         <li><a class="dropdown-item" href="{% url 'todos_os_carros' %}">Listar Carros</a></li>
-                        <li><a class="dropdown-item" href="{% url 'cadastrar-carro' %}">Cadastrar Carro</a></li>                        
+                        <li><a class="dropdown-item" href="{% url 'cadastrar-carro' %}">Cadastrar Carro</a></li>
+                        <li><a class="dropdown-item" href="{% url 'todos_os_usuario' %}">Listar Usuários</a></li>  
+                        <li><a class="dropdown-item" href="{% url 'cadastrar-carro' %}">Cadastrar Usuário</a></li>                          
                         <li>
                             <hr class="dropdown-divider">
                         </li>
