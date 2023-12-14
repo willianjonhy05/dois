@@ -18,16 +18,20 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
-from aluguel.views import Home, CarrosListView, CarroPage, RegistrationView
+from aluguel.views import Home, CarrosListView, CarroPage, RegistrationView, CriarUsuario, PerfilUsuario, AtualizarUsuario
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
+urlpatterns = [    
     path('', Home.as_view(), name="home"),
-    path('accounts/registration', RegistrationView.as_view(), name='registration'),
+    path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('carros/', CarrosListView.as_view(), name='lista_de_carros'),
+    path('accounts/registration', RegistrationView.as_view(), name='registration'),    
     path('locador/', include('aluguel.urls')),
+    path('carros/', CarrosListView.as_view(), name='lista_de_carros'),
     path('carro/<int:id>', CarroPage.as_view(), name='detalhar-carro'),
+    path('novo_usuario/', CriarUsuario.as_view(), name='novo-usuario'),
+    path('meu_perfil/<int:id>', PerfilUsuario.as_view(), name='meu-perfil'),   
+    path('usuario/atualizar/<int:id>', AtualizarUsuario.as_view(), name='atualizar-usuario'), 
+    
 ]  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

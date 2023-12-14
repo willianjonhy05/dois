@@ -5,7 +5,7 @@ from django.views.generic import TemplateView, CreateView, ListView, UpdateView,
 from .models import Carro, Usuario, Contrato
 from django.contrib.auth import get_user_model
 from django.urls import reverse
-from .forms import CarroForm, RegistrationForm
+from .forms import CarroForm, RegistrationForm, ContratoForm, UsuarioForm
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
@@ -46,6 +46,17 @@ class RegistrationView(CreateView):
     def get_success_url(self):
         messages.add_message(self.request, messages.SUCCESS, "Cadastro realizado com sucesso!")
         return reverse('home')
+
+
+class CriarUsuario(CreateView):
+    model = Usuario
+    template_name = 'criar_usuario.html'
+    form_class = UsuarioForm
+
+    def get_success_url(self):
+        messages.add_message(self.request, messages.SUCCESS, "Usuário cadastrado com sucesso!")
+        return reverse('home')
+
 
 # Views Privadas - São Responsáveis para visualização restritas do admin // Com necessidade de Login
 
@@ -88,5 +99,66 @@ class CarroPageAdm(DetailView):
     context_object_name='carro'
     pk_url_kwarg='id'
 
+class ListarUsuarios(ListView):
+    model=Usuario
+    template_name='locador/usuarios.html'
+    context_object_name='usuarios'
+
+
+class ApagarUsuario(DeleteView):
+    model=Usuario
+    template_name='locador/apagar_usuario.html'
+    pk_url_kwarg='id'
+
+class AtualizarUsuarioAdm(UpdateView):
+    model=Usuario
+    template_name='locador/atualizar_usuario.html'
+    form_class=UsuarioForm
+    pk_url_kwarg='id'
+
+    def get_success_url(self):
+        messages.add_message(self.request, messages.SUCCESS, "Usuário atualizado com sucesso!")
+        return reverse('todos_os_usuario')
+
+# class Contratos(ListView):
+#     model=Contrato
+#     template_name='locador/todos_os_contratos.html'
+#     context_object_name='contratos'
+
+
+
+
 # Views Limitadas - São Responsáveis para visualização limitadas ao usuário/cliente // Com necessidade de Login
+
+class PerfilUsuario(DetailView):
+    model=Usuario
+    template_name='usuario/meu_perfil.html'
+    context_object_name='usuario'
+    pk_url_kwarg='id'
+
+class AtualizarUsuario(UpdateView):
+    model=Usuario
+    template_name='usuario/atualizar_usuario.html'
+    form_class=UsuarioForm
+    pk_url_kwarg='id'
+
+    def get_success_url(self):
+        messages.add_message(self.request, messages.SUCCESS, "Perfil atualizado com sucesso!")
+        return reverse('home')
+
+
+# class CriarContrato(CreateView):
+#     model=Contrato
+#     template_name='usuario/contratar_carro.html'
+#     form_class=ContratoForm
+
+#     def get_success_url(self):
+#         messages.add_message(self.request, messages.SUCCESS, "Carro alugado com sucesso!")
+#         return reverse('meus_contratos')
+
+
+# class MeusContratos(ListView):
+#     model=Contrato
+#     template_name='usuario/todos_carros.html'
+#     context_object_name='carros'
 

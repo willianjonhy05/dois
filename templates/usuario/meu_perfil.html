@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static bootstrap5 %}
+{% block title %}Meu Perfil{% endblock %}
+
+
+
+{% block content %}
+
+<div class="container">
+    <div class="px-4 py-5 my-5 text-center">
+        {% if usuario.perfil %}
+        <img class="d-block mx-auto mb-4" src="{{ usuario.perfil.url }}" alt="{{ usuario.nome}}" width="72" height="57">
+        {% else %}
+        <img class="d-block mx-auto mb-4" src="{% static 'img/perfil-de-usuario.jpg' %}" alt="{{ usuario.nome}}"
+            width="72" height="57">
+        {% endif %}
+        <h1 class="display-5 fw-bold text-body-emphasis">{{ usuario.nome }} {{ usuario.sobrenome }}</h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4"><strong>CPF/CNPJ: </strong>{{ usuario.cpfcnpj }}</p>
+            <p class="lead mb-4"><strong>Idade: </strong>{{ usuario.idade }}</p>
+            <p class="lead mb-4"><strong>Data de Nascimento: </strong>{{ usuario.data_nasc }}</p>
+            <p class="lead mb-4"><strong>Sexo: </strong>{{ usuario.sexo }}</p>
+            <p class="lead mb-4"><strong>Email: </strong>{{ usuario.email }}</p>
+            <p class="lead mb-4"><strong>Telefone: </strong>{{ usuario.telefone }}</p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a href="{% url 'atualizar-usuario' usuario.id %}" class="btn btn-primary" role="button">Atualizar Perfil</a>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+
+{% endblock %}

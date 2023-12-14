@@ -149,6 +149,13 @@ class Contrato(models.Model):
     def __str__(self):
        return f"{self.carro.modelo} - {self.locatario.nome} - {self.quantidade_de_dias} - {self.valor_total}"
     
+    # def save(self, *args, **kwargs):
+    #     if self.carro.status == 'Disponível':
+    #         self.carro.status = 'Indisponível'
+    #     else:
+    #         self.carro.status = 'Disponível'
+    
+    
     class Meta:
         verbose_name = "Contrato"
         verbose_name_plural = "Contratos"
