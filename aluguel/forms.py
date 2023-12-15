@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from .models import Carro, Contrato, Usuario
-from django.forms import ModelForm, EmailField, CharField
+from django.forms import ModelForm, EmailField, CharField, DateField, ImageField
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 
@@ -29,7 +29,13 @@ class RegistrationForm(UserCreationForm):
     first_name = CharField(max_length=150, label="Nome")
     last_name = CharField(max_length=150, label="Sobrenome")
     email = EmailField(max_length=150, label="Email")
+    cpfcnpj = CharField(max_length=18, label="CPF/CNPJ")
+    telefone = CharField(max_length=20, label="Telefone")
+    data_nasc = DateField(label="Data de Nascimento")
+    perfil = ImageField(label="Foto")
+
+
     
     class Meta:
         model = get_user_model()
-        fields=['username', 'first_name', 'last_name', 'email', 'password1', 'password2' ]
+        fields=['username', 'first_name', 'last_name', 'cpfcnpj', 'telefone' , 'data_nasc', 'perfil', 'email', 'password1', 'password2' ]

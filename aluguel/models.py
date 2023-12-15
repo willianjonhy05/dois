@@ -1,6 +1,9 @@
 from django.db import models
 from datetime import date
 from django.contrib.auth import get_user_model
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -93,6 +96,13 @@ class Usuario(models.Model):
     class Meta:
         verbose_name = "Usuário"
         verbose_name_plural = "Usuários"
+
+@receiver(post_save, sender=Usuario)
+def create_user(sender, instance, created, **kwargs):
+    if created:
+        User.objects.create(username=instance.email, email=instance.email)
+
+    post_save.connect(create_user, sender=Usuario)
 
 
 class Locador(models.Model):
