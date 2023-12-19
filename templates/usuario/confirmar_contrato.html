@@ -1,0 +1,35 @@
+{% extends "base_dois.html" %}
+{% load static bootstrap5 %}
+{% block title %}Confirmar Contrato{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+    <h1>Confirmar Contrato</h1>
+    <h2>Confirme os detalhes do contrato:</h2>
+    <p>Locatário: {{ contrato.locatario }}</p>
+    <p>Veículo: {{ contrato.carro }}</p>
+    <p>Início do Contrato: {{ contrato.inicio_do_contrato }}</p>
+    <p>Fim do Contrato: {{ contrato.fim_do_contrato }}</p>
+    <p>Quantidade de Dias: {{ contrato.quantidade_de_dias }}</p>
+    <p>Forma de Pagamento: {{ contrato.forma_de_pagamento }}</p>
+    <p>Valor Total: R$ {{ contrato.valor_total }}</p>
+
+    <form method="post" action="{% url 'contratar-carro' %}">
+        {% csrf_token %}
+        <input type="hidden" name="confirmar_contrato" value="confirmar">
+        <button type="submit">Confirmar Contrato</button>
+    </form>
+
+
+
+</div>
+
+
+{% endblock %}
+
+
+{% block scripts %}
+
+{% endblock %}

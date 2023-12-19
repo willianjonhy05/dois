@@ -10,6 +10,11 @@
     <link rel="shortcut icon" href="{% static 'img/favicon/favicon.png' %}" type="image/x-icon">
     <link rel="icon" href="{% static 'img/favicon/favicon.png' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Blinker:wght@300&family=Hind+Siliguri:wght@300;400&family=Recursive&display=swap"
+        rel="stylesheet">
     <title>{% block title %}Base{% endblock %}</title>
 </head>
 
@@ -36,15 +41,16 @@
                 <div class="dropdown text-end">
                     {% if user.usuario.perfil %}
                     <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
-                        data-bs-toggle="dropdown" aria-expanded="false">                        
+                        data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="{{ usuario.perfil.url }}" alt="mdo" width="32" height="32" class="rounded-circle">
                     </a>
                     {% else %}
                     <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
-                    data-bs-toggle="dropdown" aria-expanded="false">                        
-                    <img src="{% static 'img/perfil-de-usuario.jpg' %}" alt="mdo" width="32" height="32" class="rounded-circle">
-                </a>
-                {% endif %}
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="{% static 'img/perfil-de-usuario.jpg' %}" alt="mdo" width="32" height="32"
+                            class="rounded-circle">
+                    </a>
+                    {% endif %}
 
                     <ul class="dropdown-menu text-small" aria-labelledby="navbarDarkDropdownMenuLink">
                         <li><a class="dropdown-item" href="#">Novo Aluguél</a></li>
@@ -61,7 +67,8 @@
                 {% else %}
 
                 <div class="text-end">
-                    <a href="{% url 'login' %}"><button type="button" class="btn btn-outline-light me-2">Login</button></a>
+                    <a href="{% url 'login' %}"><button type="button"
+                            class="btn btn-outline-light me-2">Login</button></a>
                     <a href="{% url 'registration' %}"><button type="button"
                             class="btn btn-warning">Cadastre-se</button></a>
                 </div>
@@ -81,12 +88,21 @@
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img src="{% static 'img/carros1.jpg' %}" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5 class="display-1 bg-light-subtle text-black"><strong>Frota de veículos moderna</strong></h5>
+                </div>
             </div>
             <div class="carousel-item">
                 <img src="{% static 'img/carros2.jpg' %}" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5 class="display-1 "><strong>Direção Confortável</strong></h5>
+                </div>
             </div>
             <div class="carousel-item">
                 <img src="{% static 'img/carros3.jpg' %}" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5 class="display-1"><strong>Multimídia Integrado</strong></h5>
+                </div>
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">

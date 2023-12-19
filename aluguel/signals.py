@@ -5,13 +5,13 @@ from .models import Usuario
 
 
 
-@receiver(post_save, sender=get_user_model())
-def criar_usuario(sender, instance, created, **kwargs):
-    if created:        
-        usuario = Usuario.objects.create(nome= instance.get_full_name(), 
-                                         email = instance.email, 
-                                         user = instance, 
-                                         cpfcnpj="cpfcnpj",
-                                         telefone="telefone",
-                                         data_nasc="data_nasc",
-                                         perfil='perfil',)
+# @receiver(post_save, sender=get_user_model())
+# def criar_usuario(sender, instance, created, **kwargs):
+#     if created:        
+#         usuario = Usuario.objects.create(nome= instance.get_full_name(), 
+#                                          email = instance.email, 
+#                                          user = instance, 
+#                                          cpfcnpj="cpfcnpj",
+#                                          telefone="telefone",
+#                                          data_nasc="data_nasc",
+#                                          perfil='perfil',)

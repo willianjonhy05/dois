@@ -91,18 +91,21 @@ class Usuario(models.Model):
     sexo = models.CharField("Sexo", max_length=100, choices=SEXO)
     
     def __str__(self):
-        return f'{self.nome} {self.sobrenome} - {self.email} - {self.idade}'
+        return f'{self.nome} {self.sobrenome} - {self.email}'
     
     class Meta:
         verbose_name = "Usuário"
         verbose_name_plural = "Usuários"
 
-@receiver(post_save, sender=Usuario)
-def create_user(sender, instance, created, **kwargs):
-    if created:
-        User.objects.create(username=instance.email, email=instance.email)
+# @receiver(post_save, sender=User)
+# def criar_perfil(sender, instance, created, **kwargs):
+#     if created:
+#         Usuario.objects.create(user=instance)
 
-    post_save.connect(create_user, sender=Usuario)
+
+# @receiver(post_save, sender=User)
+# def salvar_perfil(sender, instance, **kwargs):
+#     instance.usuario.save()
 
 
 class Locador(models.Model):
@@ -142,6 +145,7 @@ class Contrato(models.Model):
     carro = models.ForeignKey(Carro, verbose_name="Veículo", on_delete=models.CASCADE, related_name='Veículo')
     inicio_do_contrato = models.DateField("Data de Retirada do Carro")
     fim_do_contrato = models.DateField("Data da Devolução do Carro")
+    total_diarias = models.PositiveIntegerField("Quantidade de Diárias", blank=True, null=True)
 
     def calcular_dias(self):
         return (self.fim_do_contrato - self.inicio_do_contrato).days
@@ -152,8 +156,11 @@ class Contrato(models.Model):
     def calcular_valor(self):
         valor = self.quantidade_de_dias * self.carro.diaria
         return valor
+    
+    def get_valor_total(self):
+        return self.calcular_valor()
 
-    valor_total = property(calcular_valor)
+    valor_total = property(get_valor_total)
     status = models.CharField(max_length=12, choices=ANDAMENTO, default='Ativo')
 
     def __str__(self):

@@ -4,6 +4,13 @@
 .navbar-dark .navbar-nav .nav-item.dropdown:hover .nav-link::after,
 .navbar-dark .navbar-nav .nav-item.dropdown:focus .nav-link::after,
 .navbar-dark .navbar-nav .nav-item.dropdown.show .nav-link::after {
-  border-top-color: #fff; /* Cor desejada (branco) */
+  border-top-color: #fff;
+  /* Cor desejada (branco) */
 }
 
+
+h5 {
+  font-family: 'Blinker', sans-serif;
+  font-family: 'Hind Siliguri', sans-serif;
+  font-family: 'Recursive', sans-serif;
+}

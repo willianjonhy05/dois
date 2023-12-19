@@ -7,11 +7,11 @@
 
 <div class="container">
     <h1>Contratar Carro</h1>
-    <form method="post">
+    <form method="post" action="">
         {% csrf_token %}
         {% bootstrap_form form %}
-       
-        <button class="btn btn-primary" type="submit">Continuar</button>
+        
+        <button class="btn btn-primary" type="submit">Alugar</button>
     </form>
 </div>
 
@@ -22,5 +22,6 @@
 {% block scripts %}
 
 <script src="{% static 'js/calcular_dias.js' %}" defer></script>
+<script src="{% static 'js/data.js' %}" defer></script>
 
 {% endblock %}

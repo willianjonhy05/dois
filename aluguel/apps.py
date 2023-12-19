@@ -6,5 +6,5 @@ class AluguelConfig(AppConfig):
     name = 'aluguel'
 
 
-    def ready(self):
-        from . import signals
+    # def ready(self):
+    #     from . import signals
