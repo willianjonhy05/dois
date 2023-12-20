@@ -1,0 +1,34 @@
+{% extends 'base_adm.html' %}
+{% load static bootstrap5 %}
+{% block title %}Detalhar Contrato{% endblock %}
+
+
+{% block content %}
+<div class="container">
+
+    <div class="card">
+        <div class="card-header">
+          Contrato de Locação de Veículo
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{contrato.locatario.nome}} | {{contrato.carro.modelo }} - {{contrato.carro.marca }}</h5>
+          <p class="card-text">O veículo de modelo: {{contrato.carro.modelo }} e marca: {{contrato.carro.marca }} com placa: {{contrato.carro.placa }}, cor: {{contrato.carro.cor }}  e ano {{contrato.carro.ano }} está alugado para: {{contrato.locatario.nome}} {{contrato.locatario.sobrenome}}, portador do CPF/CNPJ número: {{contrato.locatario.cpfcnpj}}, nascido no dia {{contrato.locatario.data_nasc}}, de idade {{contrato.locatario.idade}} anos, do sexo {{contrato.locatario.sexo}}, que recebeu o referido veículo no dia {{contrato.inicio_do_contrato}} tendo que devolver no dia {{contrato.fim_do_contrato}} totalizando uma diária de {{contrato.quantidade_de_dias}}, pagando valor de R$ {{contrato.valor_total}} na forma de pagamento em: {{contrato.forma_de_pagamento}}. Tendo sido verdade e sem mais nada a tratar!</p>
+          <p class="card-text">Formas de Contato com {{contrato.locatario.nome}} {{contrato.locatario.sobrenome}}: </p>
+          <p class="card-text"><i class="fa-solid fa-envelope"></i> {{contrato.locatario.email}}</p>
+          <p class="card-text"><i class="fa-solid fa-phone"></i> {{contrato.locatario.telefone}}</p>
+          <a href="{% url 'atualizar_contrato' contrato.id %}" class="btn btn-primary">Atualizar Contrato</a>          
+          <a href="{% url 'apagar_contrato' contrato.id %}" class="btn btn-danger">Apagar Contrato</a>
+          <a href="{% url 'devolver_carro' contrato.id %}" class="btn btn-warning">Devolver Carro</a>
+        </div>
+        <div class="card-footer text-body-secondary">
+          Locação de Carros com Responsabilidade
+        </div>
+      </div>
+
+
+</div>
+{% endblock content %}
+
+{% block scripts %}
+
+{% endblock %}

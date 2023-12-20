@@ -22,7 +22,7 @@ class ContratoForm(ModelForm):
 
     class Meta:
         model=Contrato
-        fields=["locatario", "carro", "inicio_do_contrato", "fim_do_contrato", "forma_de_pagamento", "total_diarias"]
+        fields=["locatario", "carro", "inicio_do_contrato", "fim_do_contrato", "forma_de_pagamento", "total_diarias", "valor"]
         # widgets = {
         #     'quantidade_de_dias': forms.TextInput(attrs={'readonly': 'readonly'}),
         #     'valor_total': forms.TextInput(attrs={'readonly': 'readonly'}),

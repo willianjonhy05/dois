@@ -161,7 +161,13 @@ class Contrato(models.Model):
         return self.calcular_valor()
 
     valor_total = property(get_valor_total)
+    valor = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     status = models.CharField(max_length=12, choices=ANDAMENTO, default='Ativo')
+
+    # def save(self, *args, **kwargs):
+    #     if self.carro and self.total_diarias:
+    #         self.valor_total_diaria = self.carro.valor_diaria * self.quantidade_dias
+    #     super().save(*args, **kwargs)
 
     def __str__(self):
        return f"{self.carro.modelo} - {self.locatario.nome} - {self.quantidade_de_dias} - {self.valor_total}"

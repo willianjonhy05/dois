@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
-from aluguel.views import Home, CarrosListView, CarroPage, RegistrationView, CriarUsuario, PerfilUsuario, AtualizarUsuario, CriarContrato, alugar_carro
+from aluguel.views import Home, CarrosListView, CarroPage, RegistrationView, CriarUsuario, PerfilUsuario, AtualizarUsuario, CriarContrato, alugar_carro, Criar_Contrato
 
 urlpatterns = [    
     path('', Home.as_view(), name="home"),
@@ -29,6 +29,8 @@ urlpatterns = [
     path('carros/', CarrosListView.as_view(), name='lista_de_carros'),
     path('contratar/', CriarContrato.as_view(), name='contratar-carro'),
     # path('confirmar_contrato/', confirmar_contrato, name='confirma_contrato'),
+    path('contratar_dois/', Criar_Contrato, name='contratarr'),
+    
     path('alugar_carro/<int:carro_id>/', alugar_carro, name='alugar_carro'),
     path('carro/<int:id>', CarroPage.as_view(), name='detalhar-carro'),
     path('novo_usuario/', CriarUsuario.as_view(), name='novo-usuario'),

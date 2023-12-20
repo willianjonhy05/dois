@@ -5,8 +5,26 @@
 
 {% block content %}
 <div class="container">
-
+    {% for contrato in contratos %}
     
+    <div class="list-group">
+        
+        <a href="{% url 'detalhar_contrato' contrato.id %}" class="list-group-item list-group-item-action" aria-current="true">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{contrato.locatario.nome}} | {{contrato.carro.modelo }} - {{contrato.carro.marca }}
+                </h5>
+                {% if carro.status == 'Ativo' %}
+                <i class="fa-regular fa-times-circle"></i>
+                {% else %}
+                <i class="fa-solid fa-square-check icone"></i>
+                
+                {% endif %}
+            </div>
+            <p class="mb-1">Alugado entre os dias {{contrato.inicio_do_contrato}} e {{contrato.fim_do_contrato}}, totalizando {{contrato.quantidade_de_dias}} dias, pelo valor total de: R$ {{contrato.valor_total}}.</p>
+
+        </a>
+    </div>
+    {% endfor %}
 </div>
 
 {% endblock content %}

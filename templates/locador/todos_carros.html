@@ -56,7 +56,7 @@
                     <h6 class="card-title">{{carro.tipo}}</h6>
                     <h3 class="card-title">{{carro.marca}} {{carro.modelo}} | Diária: R$ {{carro.diaria}}</h3>
                     <p class="card-text">{{carro.bio}}</p>
-                    <a href="{% url 'detalhar-carro' carro.id %}" class="btn btn-primary">Saber Mais</a>
+                    <a href="{% url 'exibir_carro' carro.id %}" class="btn btn-primary">Saber Mais</a>
                     <a href="{% url 'detalhar-carro' carro.id %}" class="btn btn-warning">Devolver</a>
                 </div>
             </div>

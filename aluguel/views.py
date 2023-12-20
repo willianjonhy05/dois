@@ -141,11 +141,93 @@ class DetalharUsuario(DetailView):
     context_object_name='usuario'
     pk_url_kwarg='id'
 
+def CriarContratoAdm(request):
+    if request.method == 'POST':
+        form = ContratoForm(request.POST)
+        if form.is_valid():
+            contrato = form.save()
+            carro_id = int(request.POST.get('carro'))
+            carro = Carro.objects.get(id=carro_id)
+            carro.status = 'Indisponível'
+            carro.save()
+            messages.success(request, 'Contrato realizado com sucesso!')
+            return redirect('lista_de_carros')
+    else:
+        form = ContratoForm()
 
-# class Contratos(ListView):
-#     model=Contrato
-#     template_name='locador/todos_os_contratos.html'
-#     context_object_name='contratos'
+    return render(request, 'locador/cadastrar_contrato.html', {'form': form})
+
+# def DevolverCarroAdm(request, id):
+#     contrato = Contrato.objects.get(id=id)
+#     form = ContratoForm(instance=contrato)
+#     if request.method == 'POST':
+#         form = ContratoForm(request.POST, request.FILES, instance=contrato)
+#         if form.is_valid():
+#             contrato = form.save()
+#             return redirect("devolver_carro", id=id)
+#         else:
+#             return render(request, 'devolver_carro', {'form': form})
+#             # contrato.status = 'Inativo'
+#             # carro_id = int(request.POST.get('carro'))
+#             # carro = Carro.objects.get(id=carro_id)
+#             # carro.status = 'Disponível'
+#             # carro.save()
+#             # messages.success(request, 'Carro devolvido com sucesso!')
+#             # return redirect('lista_de_carros')
+#     else:
+#         return render(request, 'devolver_carro', {'form': form})
+
+#     # return render(request, 'locador/devolver_carro.html', {'form': form})
+
+
+def DevolverCarroAdm(request, id):
+    contrato = get_object_or_404(Contrato, id=id)
+
+    if request.method == 'POST':
+        form = ContratoForm(request.POST, instance=contrato)
+        
+        if form.is_valid():
+            contrato = form.save(commit=False)
+            contrato.status = 'Inativo'
+            contrato.save()
+
+            carro = contrato.carro
+            carro.status = 'Disponível'
+            carro.save()
+
+            messages.success(request, 'Carro devolvido com sucesso!')
+            return redirect('lista_de_carros')
+
+    else:
+        form = ContratoForm(instance=contrato)
+
+    return render(request, 'locador/devolver_carro.html', {'form': form})
+
+class Contratos(ListView):
+    model=Contrato
+    template_name='locador/todos_os_contratos.html'
+    context_object_name='contratos'
+
+class VerContratoAdm(DetailView):
+    model=Contrato
+    template_name='locador/detalhar_contrato.html'
+    context_object_name='contrato'
+    pk_url_kwarg='id'
+
+class AtualizarContratoAdm(UpdateView):
+    model=Contrato
+    template_name='locador/atualizar_contrato.html'
+    form_class=ContratoForm
+    pk_url_kwarg='id'
+
+    def get_success_url(self):
+        messages.add_message(self.request, messages.SUCCESS, "Contrato atualizado com sucesso!")
+        return reverse('todos_os_contratos')
+    
+class DeletarContratoAdm(DeleteView):
+    model=Contrato
+    template_name='locador/apagar_contrato.html'
+    pk_url_kwarg='id'
 
 
 
@@ -184,20 +266,24 @@ def alugar_carro(request, carro_id):
 
     return render(request, 'usuario/alugar_carro.html', {'carro': carro, 'form': form})
 
-# def Criar_Contrato(request):
-#     if request.method =='POST':
-#         form = ContratoForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             carro = Carro.objects.get(id=int(request.POST.get('carro'))) 
-#             carro.status = 'Indisponível'
-#             carro.save()
-#             messages.success(request, 'Contrato realizado com sucesso!')
-#             return redirect('lista_de_carros')
-        
-#         else:
-#             form = ContratoForm()
-#             return render(request, 'usuario/contratar_carro.html', {'form':form})
+def Criar_Contrato(request):
+    if request.method == 'POST':
+        form = ContratoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            carro = Carro.objects.get(id=int(request.POST.get('carro')))
+            carro.status = 'Indisponível'
+            carro.save()
+            messages.success(request, 'Contrato realizado com sucesso!')
+            return redirect('lista_de_carros')
+    else:
+        form = ContratoForm()
+    
+   
+    return render(request, 'usuario/contratar_carro.html', {'form': form})
+
+
+
     
 # def Criar_Contrato(request):
 #     if request.method == 'POST':
@@ -231,20 +317,20 @@ class CriarContrato(CreateView):
         return super().form_valid(form)
     
 
-class DevolverCarro(UpdateView):
-    model=Contrato
-    template_name='usuario/devolver_carro.html'
-    form_class=ContratoForm
-    pk_url_kwarg='id'
+# class DevolverCarro(UpdateView):
+#     model=Contrato
+#     template_name='usuario/devolver_carro.html'
+#     form_class=ContratoForm
+#     pk_url_kwarg='id'
 
-    def get_success_url(self):
-        messages.add_message(self.request, messages.SUCCESS, "Contrato cadastrado com sucesso!")
-        return reverse('lista_de_carros')
+#     def get_success_url(self):
+#         messages.add_message(self.request, messages.SUCCESS, "Contrato cadastrado com sucesso!")
+#         return reverse('lista_de_carros')
     
-    def form_valid(self, form):        
-        form.instance.quantidade_de_dias = (form.instance.fim_do_contrato - form.instance.inicio_do_contrato).days
-        form.instance.valor_total = form.instance.calcular_valor()
-        return super().form_valid(form)
+#     def form_valid(self, form):        
+#         form.instance.quantidade_de_dias = (form.instance.fim_do_contrato - form.instance.inicio_do_contrato).days
+#         form.instance.valor_total = form.instance.calcular_valor()
+#         return super().form_valid(form)
     
 
 
